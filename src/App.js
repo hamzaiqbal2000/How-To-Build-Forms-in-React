@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [submitting, setSubmitting] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 1000);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <h1>How About Them Apples</h1>
+      {submitting && <div> Submitting Form...</div>}
+
+      <form action="" onSubmit={handleSubmit}>
+        <fieldset>
+          <label htmlFor="">
+            <p>Name</p>
+            <input name="name" />
+          </label>
+        </fieldset>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
 
 export default App;
+//uncontrolled component - let browser handle most of the form elements - react is not setting the value
+//controlled components = react is actively updating the input
