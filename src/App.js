@@ -1,13 +1,22 @@
 import React, { useReducer, useState } from "react";
 import "./App.css";
 
-const formReducer = (state, { name, value }) => {
-  return { ...state, [name]: value };
+const formReducer = (state, event) => {
+  if (event.reset) {
+    return {
+      apple: "",
+      count: 0,
+      name: "",
+      "gift-wrap": false,
+    };
+  }
+
+  return { ...state, [event.name]: event.value };
 };
 
 function App() {
   const [submitting, setSubmitting] = useState(false);
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [formData, setFormData] = useReducer(formReducer, { count: 100 });
 
   function handleChange(e) {
     const isCheckbox = e.target.type === "checkbox";
@@ -23,7 +32,10 @@ function App() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-    }, 1000);
+      setFormData({
+        reset: true,
+      });
+    }, 3000);
   }
 
   return (
@@ -45,13 +57,22 @@ function App() {
         <fieldset>
           <label htmlFor="">
             <p>Name</p>
-            <input name="name" onChange={handleChange} />
+            <input
+              name="name"
+              onChange={handleChange}
+              value={formData.name || ""}
+            />
           </label>
         </fieldset>
         <fieldset>
           <label htmlFor="">
             <p>Apples</p>
-            <select name="apple" id="" onChange={handleChange}>
+            <select
+              name="apple"
+              id=""
+              onChange={handleChange}
+              value={formData.apple || ""}
+            >
               <option value="">--Please choose an option</option>
               <option value="fuji">Fuji</option>
               <option value="jonathan">Jonathan</option>
@@ -65,11 +86,17 @@ function App() {
               name="count"
               onChange={handleChange}
               step="1"
+              value={formData.count || ""}
             />
           </label>
           <label htmlFor="">
             <p>Gift Wrap</p>
-            <input type="checkbox" name="gift-wrap" onChange={handleChange} />
+            <input
+              type="checkbox"
+              name="gift-wrap"
+              onChange={handleChange}
+              value={formData["gift-wrap"] || false}
+            />
           </label>
         </fieldset>
         <button type="submit">Submit</button>
