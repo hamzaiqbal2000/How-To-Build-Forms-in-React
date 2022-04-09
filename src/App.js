@@ -54,7 +54,7 @@ function App() {
         </div>
       )}
       <form action="" onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset disabled={submitting}>
           <label htmlFor="">
             <p>Name</p>
             <input
@@ -64,7 +64,7 @@ function App() {
             />
           </label>
         </fieldset>
-        <fieldset>
+        <fieldset disabled={submitting}>
           <label htmlFor="">
             <p>Apples</p>
             <select
@@ -96,10 +96,13 @@ function App() {
               name="gift-wrap"
               onChange={handleChange}
               value={formData["gift-wrap"] || false}
+              disabled={formData.apple !== "fuji"}
             />
           </label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={submitting}>
+          Submit
+        </button>
       </form>
     </div>
   );
