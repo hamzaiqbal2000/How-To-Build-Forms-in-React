@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+## How To Build Forms in React
+
+Forms are key to rich web applications. In React, you have different options for connecting and controlling forms and elements. Like other components, you can dynamically update properties including the value input elements. Uncontrolled components are best for simplicity, but might not fit situations when a component needs to be cleared or pre-populated with data. Controlled components give you more opportunities to update the data, but can add another level of abstraction that may cause unintentional bugs or re-renders.
+
+Regardless of your approach, React gives you the ability to dynamically update and adapt your forms to the needs of your application and your users.
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
